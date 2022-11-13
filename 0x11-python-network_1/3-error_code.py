@@ -1,16 +1,15 @@
 #!/usr/bin/python3
-"""
-Take in a URL, send a request to URL, and dispaly body of response decoded in
-utf-8. Manage urllib's error exceptions.
-"""
-import sys
+'''displays body of response after sending POST request with email'''
 import urllib.request
-import urllib.error
+import sys
 
 if __name__ == "__main__":
-    req = urllib.request.Request(sys.argv[1])
+    url = sys.argv[1]
     try:
-        with urllib.request.urlopen(req) as res:
-            print(res.read().decode('utf-8'))
-    except urllib.error.URLError as e:
-        print("Error code: {}".format(e.code))
+        req = urllib.request.Request(url)
+        with urllib.request.urlopen(req) as response:
+            html = response.read().decode('utf-8')
+            print(html)
+    except urllib.error.HTTPError as e:
+        code = e.code
+        print("Error code: {:d}".format(code))
