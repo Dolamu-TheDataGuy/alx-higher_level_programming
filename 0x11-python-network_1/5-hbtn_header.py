@@ -14,4 +14,4 @@ if __name__ == "__main__":
     # used the headers.ger to get requests
     #req = r.headers.get('X-Request-Id')
     #print(req)
-    print(r.headers.get('X-Request-Id'))
+    print(r.headers.get("X-Request-Id"))
