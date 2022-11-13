@@ -1,16 +1,16 @@
 #!/usr/bin/python3
+""" A script that takes in a URL and sends a request to
+    the URL and displays the body of the response while
+    handling exceptions
 """
-Use requests package to make a get request to given URL and display
-the body of response, or error code if error.
-"""
-import sys
 import requests
+import sys
 
 if __name__ == "__main__":
     url = sys.argv[1]
     r = requests.get(url)
-    try:
-        r.raise_for_status()
-        print(r.text)
-    except Exception as e:
+
+    if r.status_code >= 400:
         print("Error code: {}".format(r.status_code))
+    else:
+        print(r.text)
